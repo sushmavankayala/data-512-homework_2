@@ -53,20 +53,55 @@ Note:
 - The data acquisition step takes ~2 hours to loop through the revision ids of all articles mentioned in the CSV file and do the ORES call to fetch the article rating. This is attributed to the number of articles and sleep time added to ensure that we do not hit throttling limits of the ORES API
 - Make sure that the modules `requests` and `pandas` are installed before running the notebook. You can use `pip/pip3` for installation.
 
-## Data Files
+## Data Files and corresponding schemas
 
 ### Input
 The below csv files are available in the resources folder of this repository
 
 - [politicians_by_country_AUG.2024.csv](resources%2Fpoliticians_by_country_AUG.2024.csv): List of Wikipedia articles about politicians
+```Text
+name        # name of the article (politicians name)
+url         # url to the wikipedia article
+country     # country to which the politician is/was associated
+```
 - [population_by_country_AUG.2024.csv](resources%2Fpopulation_by_country_AUG.2024.csv): Population data by country
+```Text
+Geography        # name of the country/region
+Population       # population in millions
+```
 
 ### Generated
 The below csv files are present in the generated_files folder of this repository
 - [wiki_list_with_revision.csv](generated_files%2Fwiki_list_with_revision.csv): Contains a list of articles and their latest revision ids, based on page info extracted from MediaWiki API
+```Text
+pageid          # page id of the wikipedia article
+name            # name of the article (politicians name)
+revision_id     # latest revision id of the wikipedia article (fetched from PageInfo call)
+```
 - [enriched_article_data.csv](generated_files%2Fenriched_article_data.csv): Contains a list of articles with their latest revision ids and corresponding article rating, based on the response from ORES API
+```Text
+pageid          # page id of the wikipedia article
+name            # name of the article (politicians name)
+revision_id     # latest revision id of the wikipedia article (fetched from PageInfo call)
+article_rating  # article rating fetched from the ORES API call
+                    Possible values for article_rating are:
+                    FA      # Featured article
+                    GA      # Good article (also known as A-Class)
+                    B       # B-Class article
+                    C       # C-Class article
+                    Start   # Start-class article
+                    Stub    # Stub-class article
+```
 - [wp_politicians_by_country.csv](generated_files%2Fwp_politicians_by_country.csv): Combined data on politicians, countries, and article quality
-- [wp_countries-no_match.txt](generated_files%2Fwp_countries-no_match.txt): Countries with no matches between datasets
+```Text
+country        # country name
+region         # region associated to the country
+population     # population of the country (in millions)
+article_title  # name of the article (politician's name) 
+revision_id    # latest revision id of the wikipedia article ( fetched from PageInfo call)
+article_rating # article rating fetched from the ORES API call
+```
+- [wp_countries-no_match.txt](generated_files%2Fwp_countries-no_match.txt): list of countries with no matches between datasets.
 
 ## Processing workflow
 
