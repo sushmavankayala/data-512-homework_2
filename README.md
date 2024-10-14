@@ -39,6 +39,14 @@ A copy of the reference code can be found in the `reference_code` folder of this
 
 The code for the entire analysis resides in [Wiki_articles_bias_analysis.ipynb](Wiki_articles_bias_analysis.ipynb).\
 
+### Get access token
+
+To access Lift Wing (the ML API service), you'll need a Wikimedia account. If you already have a Wikipedia account, it might work. Otherwise, create a new account to get an access token.
+Use this [official guide](https://api.wikimedia.org/wiki/Authentication) to create an API key for your account. * Make sure to create a Personal API token instead of Server-side app key* 
+On successfully creating the access token, you'll receive a Client ID, Client Secret, and Access Token—save all three. If lost, you'll need to deactivate the token and create a new one.
+
+In the code for data acquisition, make sure to use your username and the Access Token generated.
+
 The notebook does not need any additional configurations, so you can use the `Run All Cells` or `Restart Kernel and Run All Cells`  option of the jupyter notebook.
 
 Note:
@@ -60,4 +68,31 @@ The below csv files are present in the generated_files folder of this repository
 - [wp_politicians_by_country.csv](generated_files%2Fwp_politicians_by_country.csv): Combined data on politicians, countries, and article quality
 - [wp_countries-no_match.txt](generated_files%2Fwp_countries-no_match.txt): Countries with no matches between datasets
 
+## Processing workflow
 
+#### Step 1: Fetching Page Information
+
+The script loops through a dataset of article titles, retrieving page information for each one from the Wikimedia API. This data is saved to an intermediary file for later use.
+
+#### Step 2: Retrieving Quality Scores
+
+For each article, the script uses the last revision ID to request a quality score from the ORES API. If successful, the score is saved to the intermediary CSV file. If the request fails or a revision ID is missing, those articles are logged.
+
+#### Step 3: Generating the Output File
+
+Once the ORES data is gathered, it is combined with the Wikipedia page info. Articles without revision IDs are included but left with blank score fields. The dataset is then merged with population data, and the final output is stored as a CSV file. Any countries that were not matched are recorded in a text file.
+
+#### Step 4: Data Analysis
+
+The analysis produces the following insights from the generated output file [wp_politicians_by_country.csv](generated_files%2Fwp_politicians_by_country.csv) :
+
+- **Top 10 countries by article coverage**: Countries with the highest number of articles per capita (descending order).
+- **Bottom 10 countries by article coverage**: Countries with the lowest number of articles per capita (ascending order).
+- **Top 10 countries by article quality**: Countries with the most high-quality articles per capita (descending order).
+- **Bottom 10 countries by article quality**: Countries with the fewest high-quality articles per capita (ascending order).
+- **Regions by total article coverage**: A ranked list of geographic regions by total articles per capita (descending order).
+- **Regions by article quality coverage**: A ranked list of regions by high-quality articles per capita (descending order).
+
+## Research Implications
+
+TODO: Add details
