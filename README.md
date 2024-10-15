@@ -1,4 +1,4 @@
-# Wikipedia Political Figures Analysis
+# Analysis of Wikipedia Articles on Politicians
 #### DATA-512 | Homework 2 | Considering Bias in Data
 
 ## Project Goal
