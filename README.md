@@ -150,6 +150,6 @@ These steps would help create a more accurate representation of articles-per-cap
 ## Limitations and considerations
 
  - Some entries, like Mohammad Khan (athlete), Robert Rey (plastic surgeon), etc are not primarily politicians. However, upon reading about these individuals, I learnt that they've had political involvement at some point, justifying their inclusion in the analysis.
- - The PageInfo API call failed for a few articles. I've decided to retain the articles for processing, with empty value stored in the latest revision id.
+ - The PageInfo API call failed for a few articles; 8 to be precise. I've decided to retain the articles for processing, with empty value stored in the latest revision id.
  - The ORES scores API occasionally failed due to timeouts.The call failed 7 times for me, and on discussing with a few individuals in the cohort - I learnt that each of them have different number of API call failure. This suggests that the ORES API call is somewhat unreliable.
- - Countries like Monaco and Tuvalu show populations as '0 million,' when they are likely in the thousands. This still implies that the per capita value is higher, and hence these countries are not removed from the final result.
+ - Countries like Monaco and Tuvalu show populations as '0 million,' when they are likely in the thousands. This still implies that the per capita value is higher, and hence final analysis has 2 tables - with and without these countries with 0.0 as population in millions
