@@ -72,6 +72,8 @@ Population       # population in millions
 
 ### Generated
 The below csv files are present in the generated_files folder of this repository
+
+#### Intermediate files
 - [wiki_list_with_revision.csv](generated_files%2Fwiki_list_with_revision.csv): Contains a list of articles and their latest revision ids, based on page info extracted from MediaWiki API
 ```Text
 pageid          # page id of the wikipedia article
@@ -92,6 +94,7 @@ article_rating  # article rating fetched from the ORES API call
                     Start   # Start-class article
                     Stub    # Stub-class article
 ```
+#### Output files
 - [wp_politicians_by_country.csv](generated_files%2Fwp_politicians_by_country.csv): Combined data on politicians, countries, and article quality
 ```Text
 country        # country name
