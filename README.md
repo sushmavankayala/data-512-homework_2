@@ -1,3 +1,5 @@
+### Note: This project is done as a part of class assignment, and demonstrates my ability in data analysis
+
 # Analysis of Wikipedia Articles on Politicians
 #### DATA-512 | Homework 2 | Considering Bias in Data
 
